@@ -22,8 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
         })(params.get('status'));
         // Show Save Changes and Cancel buttons
         var actions = document.querySelector('.form-actions');
-        actions.innerHTML = '<button type="submit" class="btn btn-add">Save Changes</button>' +
-            '<button id="cancel-edit" type="button" class="btn btn-show">Cancel</button>';
+        actions.innerHTML =
+            '<button type="submit" class="btn btn-primary btn-add px-4 py-2 rounded-pill shadow-sm d-flex align-items-center gap-1" style="background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%); border: none; transition: box-shadow 0.2s;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #1976d2\'" onmouseout="this.style.boxShadow=\'none\'">' +
+                '<img src="https://img.icons8.com/ios-glyphs/18/ffffff/save--v1.png" alt="Save" style="margin-bottom:2px;" /> Save Changes' +
+            '</button>' +
+            '<button id="cancel-edit" type="button" class="btn btn-outline-secondary btn-show px-4 py-2 rounded-pill shadow-sm d-flex align-items-center gap-1" style="background: linear-gradient(90deg, #fbd3e0 0%, #e0b1f4 100%); border: none; color: #7c3aed; transition: box-shadow 0.2s;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #e0b1f4\'" onmouseout="this.style.boxShadow=\'none\'">' +
+                '<img src="https://img.icons8.com/ios-glyphs/18/7c3aed/cancel.png" alt="Cancel" style="margin-bottom:2px;" /> Cancel' +
+            '</button>';
         // Save changes handler
         form.onsubmit = function (e) {
             e.preventDefault();
@@ -109,30 +114,34 @@ function createTaskCard(task, idx) {
     var priorityClass = (task.priority || '').toLowerCase();
     var priorityGradient = '';
     if (priorityClass === 'urgent') {
-        priorityGradient = 'background: linear-gradient(90deg, #b71c1c 0%, #ff9800 100%); color: #fff;';
+        priorityGradient = 'background: linear-gradient(90deg, #be0202ff 0%, #f5bf8fff 100%); color: #ffffff;';
     } else if (priorityClass === 'high') {
-        priorityGradient = 'background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%); color: #fff;';
+        priorityGradient = 'background: linear-gradient(90deg, #053f81ff 0%, #97cefbff 100%); color: #ffffff;';
     } else if (priorityClass === 'medium') {
-        priorityGradient = 'background: linear-gradient(90deg, #fbc02d 0%, #fff176 100%); color: #7c3aed;';
+        priorityGradient = 'background: linear-gradient(90deg, #f9a825 0%, #fff9c4 100%); color: #2e2e2e';
     } else if (priorityClass === 'low') {
-        priorityGradient = 'background: linear-gradient(90deg, #43a047 0%, #a5d6a7 100%); color: #fff;';
+        priorityGradient = 'background: linear-gradient(90deg, #05690aff 0%, #a5d6a7 100%); color: #ffffff;';
     } else {
-        priorityGradient = 'background: linear-gradient(90deg, #eac1f9 0%, #fbd3e0 100%); color: #7c3aed;';
+        priorityGradient = 'background: linear-gradient(90deg, #e1bee7 0%, #fce4ec 100%); color: #6a1b9a;';
     }
-    var editBtnGradient = 'background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
-    var deleteBtnGradient = 'background: linear-gradient(90deg, #b71c1c 0%, #ff9800 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
+    var editBtnGradient = 'background: linear-gradient(90deg, #021a32ff 0%, #64b5f6 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
+    var deleteBtnGradient = 'background: linear-gradient(90deg, #820404ff 0%, #ff0037ff 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
     var html = '<div class="kanban-task card mb-3 shadow-sm ' + themeClass + ' ' + statusClass + ' rounded-4" data-task-idx="' + idx + '" style="border-width:2px; border-radius:1.5rem;">' +
         '<div class="card-body p-3">' +
         '<div class="d-flex align-items-center mb-2">' + icon + '<span class="task-title fw-bold flex-grow-1" style="font-size:1.2rem;">' + task.title + '</span></div>' +
         '<div class="task-meta d-flex justify-content-between mb-2">' +
         '<span class="meta-badge badge rounded-pill px-3 py-2 ' + statusClass + '" style="font-size:1rem;">' + statusLabel + '</span>' +
-        '<span class="meta-date text-muted"><img src="https://img.icons8.com/ios-glyphs/20/7c3aed/calendar--v1.png" alt="date" /> ' + (task.date || '') + '</span>' +
+        '<span class="meta-date text-muted px-2 py-1 rounded-3" style="background:#f3f4f6; color:#333;"><img src="https://img.icons8.com/ios-glyphs/20/7c3aed/calendar--v1.png" alt="date" /> ' + (task.date || '') + '</span>' +
         '</div>' +
         '<div class="meta-footer d-flex align-items-center justify-content-between">' +
         '<span class="priority-badge badge ' + priorityClass + ' rounded-pill" style="font-size:0.95rem;' + priorityGradient + '"><img src="https://img.icons8.com/ios-glyphs/18/7c3aed/checked-checkbox.png" alt="priority" /> ' + capitalizeFirst(task.priority || '') + '</span>' +
         '<div class="kanban-task-actions ms-2 d-flex gap-2">' +
-            '<button class="edit-task-btn btn btn-sm rounded-pill" style="' + editBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #1976d2\'" onmouseout="this.style.boxShadow=\'none\'">Edit</button>' +
-            '<button class="delete-task-btn btn btn-sm rounded-pill" style="' + deleteBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #b71c1c\'" onmouseout="this.style.boxShadow=\'none\'">Delete</button>' +
+            '<button class="edit-task-btn btn btn-sm rounded-pill d-flex align-items-center gap-1" style="' + editBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #1976d2\'" onmouseout="this.style.boxShadow=\'none\'">' +
+                '<img src="https://img.icons8.com/ios-glyphs/18/ffffff/edit--v1.png" alt="Edit" style="margin-bottom:2px;" /> Edit' +
+            '</button>' +
+            '<button class="delete-task-btn btn btn-sm rounded-pill d-flex align-items-center gap-1" style="' + deleteBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #b71c1c\'" onmouseout="this.style.boxShadow=\'none\'">' +
+                '<img src="https://img.icons8.com/ios-glyphs/18/ffffff/delete-sign.png" alt="Delete" style="margin-bottom:2px;" /> Delete' +
+            '</button>' +
         '</div>' +
         '</div>' +
         '</div>' +
