@@ -88,18 +88,54 @@ function capitalizeFirst(str) {
 function createTaskCard(task, idx) {
     var statusLabel = '';
     var statusClass = '';
-    if (task.status === 'not-started') { statusLabel = 'To do'; statusClass = 'status-not-started'; }
-    else if (task.status === 'in-progress') { statusLabel = 'Doing'; statusClass = 'status-in-progress'; }
-    else if (task.status === 'completed') { statusLabel = 'Done'; statusClass = 'status-completed'; }
+    var themeClass = '';
+    var icon = '';
+    if (task.status === 'not-started') {
+        statusLabel = 'To do';
+        statusClass = 'status-not-started';
+        themeClass = 'border-primary bg-gradient bg-todo';
+        icon = '<img src="https://img.icons8.com/color/32/000000/idea.png" alt="To Do" style="margin-right:6px;" />';
+    } else if (task.status === 'in-progress') {
+        statusLabel = 'Doing';
+        statusClass = 'status-in-progress';
+        themeClass = 'border-warning bg-gradient bg-doing';
+        icon = '<img src="https://img.icons8.com/color/32/000000/refresh--v2.png" alt="Doing" style="margin-right:6px;" />';
+    } else if (task.status === 'completed') {
+        statusLabel = 'Done';
+        statusClass = 'status-completed';
+        themeClass = 'border-success bg-gradient bg-done';
+        icon = '<img src="https://img.icons8.com/color/32/000000/checked--v1.png" alt="Done" style="margin-right:6px;" />';
+    }
     var priorityClass = (task.priority || '').toLowerCase();
-    var html = '<div class="kanban-task ' + statusClass + '" data-task-idx="' + idx + '">' +
-        '<div class="task-title">' + task.title + '</div>' +
-        '<div class="task-meta">' +
-        '<span class="meta-badge ' + statusClass + '"><img src="https://img.icons8.com/ios-glyphs/30/000000/ok--v1.png" alt="status" />' + statusLabel + '</span>' +
-        '<span class="meta-date"><img src="https://img.icons8.com/ios-glyphs/30/000000/calendar--v1.png" alt="date" />' + (task.date || '') + '</span>' +
+    var priorityGradient = '';
+    if (priorityClass === 'urgent') {
+        priorityGradient = 'background: linear-gradient(90deg, #b71c1c 0%, #ff9800 100%); color: #fff;';
+    } else if (priorityClass === 'high') {
+        priorityGradient = 'background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%); color: #fff;';
+    } else if (priorityClass === 'medium') {
+        priorityGradient = 'background: linear-gradient(90deg, #fbc02d 0%, #fff176 100%); color: #7c3aed;';
+    } else if (priorityClass === 'low') {
+        priorityGradient = 'background: linear-gradient(90deg, #43a047 0%, #a5d6a7 100%); color: #fff;';
+    } else {
+        priorityGradient = 'background: linear-gradient(90deg, #eac1f9 0%, #fbd3e0 100%); color: #7c3aed;';
+    }
+    var editBtnGradient = 'background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
+    var deleteBtnGradient = 'background: linear-gradient(90deg, #b71c1c 0%, #ff9800 100%); color: #fff; border: none; transition: box-shadow 0.2s;';
+    var html = '<div class="kanban-task card mb-3 shadow-sm ' + themeClass + ' ' + statusClass + ' rounded-4" data-task-idx="' + idx + '" style="border-width:2px; border-radius:1.5rem;">' +
+        '<div class="card-body p-3">' +
+        '<div class="d-flex align-items-center mb-2">' + icon + '<span class="task-title fw-bold flex-grow-1" style="font-size:1.2rem;">' + task.title + '</span></div>' +
+        '<div class="task-meta d-flex justify-content-between mb-2">' +
+        '<span class="meta-badge badge rounded-pill px-3 py-2 ' + statusClass + '" style="font-size:1rem;">' + statusLabel + '</span>' +
+        '<span class="meta-date text-muted"><img src="https://img.icons8.com/ios-glyphs/20/7c3aed/calendar--v1.png" alt="date" /> ' + (task.date || '') + '</span>' +
         '</div>' +
-        '<div class="meta-footer"><img src="https://img.icons8.com/ios-glyphs/30/000000/checked-checkbox.png" alt="calendar" /><span class="priority-badge ' + priorityClass + '">' + capitalizeFirst(task.priority || '') + '</span></div>' +
-        '<div class="kanban-task-actions"><button class="edit-task-btn">Edit</button><button class="delete-task-btn">Delete</button></div>' +
+        '<div class="meta-footer d-flex align-items-center justify-content-between">' +
+        '<span class="priority-badge badge ' + priorityClass + ' rounded-pill" style="font-size:0.95rem;' + priorityGradient + '"><img src="https://img.icons8.com/ios-glyphs/18/7c3aed/checked-checkbox.png" alt="priority" /> ' + capitalizeFirst(task.priority || '') + '</span>' +
+        '<div class="kanban-task-actions ms-2 d-flex gap-2">' +
+            '<button class="edit-task-btn btn btn-sm rounded-pill" style="' + editBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #1976d2\'" onmouseout="this.style.boxShadow=\'none\'">Edit</button>' +
+            '<button class="delete-task-btn btn btn-sm rounded-pill" style="' + deleteBtnGradient + 'padding: 0.35rem 1.1rem;" onmouseover="this.style.boxShadow=\'0 0 0 0.2rem #b71c1c\'" onmouseout="this.style.boxShadow=\'none\'">Delete</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
         '</div>';
     return html;
 }
