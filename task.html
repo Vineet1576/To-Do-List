@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - To Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body style="background:#ffffff; min-height:100vh;">
+    <nav class="navbar-fixed">
+        <div class="navbar-content">
+            <div class="navbar-title">To-Do List</div>
+            <div class="navbar-controls">
+                <select id="sort-select" class="custom-select">
+                    <option value="none" disabled selected>Sort By</option>
+                    <option value="date-asc">Date Ascending</option>
+                    <option value="date-desc">Date Descending</option>
+                    <option value="priority">Priority (Urgent to Low)</option>
+                </select>
+                <input id="search-bar" class="custom-search" type="text" placeholder="Search by title..." />
+            </div>
+        </div>
+    </nav>
+    <div style="max-width:1400px;margin:auto;">
+        <div class="kanban-board">
+            <div class="kanban-col">
+                <div class="kanban-title">To-Do | <span id="todo-count" style="color: gray; font-size: 1.2rem;"></span>
+                </div>
+                <hr style="border: none; border-top: 5px dotted gray;">
+                <div id="todo-tasks"></div>
+                <button class="add-task-btn" onclick="window.location.href='index.html'" title="Add Task">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/plus-math.png" alt="Add" />
+                </button>
+            </div>
+            <div class="kanban-col">
+                <div class="kanban-title">Doing | <span id="doing-count" style="color: gray; font-size: 1.2rem;"></span>
+                </div>
+                <hr style="border: none; border-top: 5px dotted gray;">
+                <div id="doing-tasks"></div>
+                <button class="add-task-btn" onclick="window.location.href='index.html'" title="Add Task">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/plus-math.png" alt="Add" />
+                </button>
+            </div>
+            <div class="kanban-col">
+                <div class="kanban-title">Done | <span id="done-count" style="color: gray; font-size: 1.2rem;"></span>
+                </div>
+                <hr style="border: none; border-top: 5px dotted gray;">
+                <div id="done-tasks"></div>
+                <button class="add-task-btn" onclick="window.location.href='index.html'" title="Add Task">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/plus-math.png" alt="Add" />
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

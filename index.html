@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📝</text></svg>">
+    <script defer src="script.js"></script>
+</head>
+
+<body style="background:#ffffff; min-height:100vh;">
+    <div class="main-card">
+        <div class="main-title">To-Do List</div>
+        <form id="todo-form">
+            <div class="form-row">
+                <label class="form-label" for="todo-input">New Task:</label>
+                <input class="form-input" type="text" id="todo-input" placeholder="Add a new task" required>
+            </div>
+            <div class="form-row">
+                <label class="form-label" for="date-input">Date:</label>
+                <input class="form-input" type="date" id="date-input" required>
+            </div>
+            <div class="form-row">
+                <label class="form-label" for="priority-input">Priority:</label>
+                <select class="form-select" id="priority-input" required>
+                    <option value="" disabled selected>Select priority</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="form-label" for="status-input">Status:</label>
+                <select class="form-select" id="status-input" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="to-do">To Do</option>
+                    <option value="doing">Doing</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-add">Add Task</button>
+                <button id="show-tasks" type="button" class="btn btn-show">Show Tasks</button>
+            </div>
+        </form>
+        <div class="task-list" id="task-list"></div>
+    </div>
+</body>
+
+</html>
